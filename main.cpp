@@ -27,7 +27,6 @@ int main()
 	bool bPlayAgain = false;
 	do
 	{
-		PrintIntro();
 		PlayGame();
 		bPlayAgain = AskToPlayAgain();
 	}
@@ -56,7 +55,9 @@ void PrintIntro()
 void PlayGame()
 {
 	BCGame.Reset();
+	BCGame.Randomize();
 	int32 MaxTries = BCGame.GetMaxTries();
+	PrintIntro();
 	
 	// loop asking for guesses while the game
 	// is NOT won and there are still tries remaining

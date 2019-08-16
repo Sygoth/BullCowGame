@@ -38,7 +38,7 @@ public:
 	void Reset();
 	// couts bulls & cows, and increases try # assuming valid guess
 	FBullCowCount SubmitValidGuess(FString);
-	FString Randomize();
+	void Randomize();
 
 private:
 	// see constructor for initialization

@@ -18,14 +18,14 @@ int32 FBullCowGame::GetHiddenWordLength() const {	return MyHiddenWord.length(); 
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 int32 FBullCowGame::GetMaxTries() const {
-	TMap<int32, int32> WordLengthToMaxTries{ {3,4}, {4,7},{5,10},{6,15},{7,20} };
+	TMap<int32, int32> WordLengthToMaxTries{ {3,4}, {4,7},{5,10},{6,15},{7,20},{8,25},{9,30},{10,35} }; // TODO finish map. user testing required.
 	return WordLengthToMaxTries[MyHiddenWord.length()];
 }
 
 void FBullCowGame::Reset()
 {
 	constexpr int32 MAX_TRIES = 8;
-	const FString HIDDEN_WORD = Randomize();
+	const FString HIDDEN_WORD = "planet";
 
 	MyHiddenWord = HIDDEN_WORD;
 	MyCurrentTry = 1;
@@ -66,7 +66,7 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
 }
 
 // randomizer code
-FString FBullCowGame::Randomize()
+void FBullCowGame::Randomize()
 {
 	std::vector<FString> Word;
 	int32 NumberOfLines = 0;
@@ -86,7 +86,10 @@ FString FBullCowGame::Randomize()
 	Spot = rand() % NumberOfLines;
 
 	File.close();
-	return Word[Spot];
+
+	MyHiddenWord = Word[Spot];
+
+	return;
 }
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
